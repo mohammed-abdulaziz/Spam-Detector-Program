@@ -63,6 +63,6 @@ Select a folder containing the dataset structure
 **Screenshot:**
 
 Here is a sample output after running:
-div align="center">
+div align="
   <img src="image_720.png" alt="Improved GUI">
 </div>
