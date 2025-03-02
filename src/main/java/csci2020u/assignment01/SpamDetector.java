@@ -24,29 +24,25 @@ public class SpamDetector {
             return false;
         }
 
-
         File hamFolder = new File(trainFolder, "ham");
-        File[] hamFiles = hamFolder.listFiles();
+        File[] hamFiles = hamFolder.listFiles((dir, name) -> !name.equals("cmds"));
         if (hamFiles == null || hamFiles.length == 0) {
             return false;
         }
         trainFolders(hamFiles, trainHamFreq);
 
-
         File hamFolder2 = new File(trainFolder, "ham2");
-        File[] hamFiles2 = hamFolder2.listFiles();
+        File[] hamFiles2 = hamFolder2.listFiles((dir, name) -> !name.equals("cmds"));
         if (hamFiles2 != null) {
             trainFolders(hamFiles2, trainHamFreq);
         }
 
-
         File spamFolder = new File(trainFolder, "spam");
-        File[] spamFiles = spamFolder.listFiles();
+        File[] spamFiles = spamFolder.listFiles((dir, name) -> !name.equals("cmds"));
         if (spamFiles == null || spamFiles.length == 0) {
             return false;
         }
         trainFolders(spamFiles, trainSpamFreq);
-
 
         int hamFileCount = (hamFiles != null ? hamFiles.length : 0) + (hamFiles2 != null ? hamFiles2.length : 0);
         int spamFileCount = spamFiles != null ? spamFiles.length : 0;
@@ -58,7 +54,6 @@ public class SpamDetector {
         return true;
     }
 
-
     public List<TestFile> classifyEmails(File dataFolder) {
         List<TestFile> results = new ArrayList<>();
 
@@ -67,25 +62,23 @@ public class SpamDetector {
             return results;
         }
 
-
         File hamTestFolder = new File(testFolder, "ham");
         if (hamTestFolder.exists() && hamTestFolder.isDirectory()) {
-            File[] hamFiles = hamTestFolder.listFiles();
+            File[] hamFiles = hamTestFolder.listFiles((dir, name) -> !name.equals("cmds"));
             if (hamFiles != null) {
                 for (File file : hamFiles) {
                     if (file.isFile()) {
-                        Map<String, Double> fileProbs = fileSpamWordProb(file, hamWordProb, spamWordProb);
-                        double spamProb = spamFileProb(file, fileProbs);
+                        Map<String, Double> fileProb = fileSpamWordProb(file, hamWordProb, spamWordProb);
+                        double spamProb = spamFileProb(file, fileProb);
                         results.add(new TestFile(file.getName(), spamProb, "ham"));
                     }
                 }
             }
         }
 
-
         File spamTestFolder = new File(testFolder, "spam");
         if (spamTestFolder.exists() && spamTestFolder.isDirectory()) {
-            File[] spamFiles = spamTestFolder.listFiles();
+            File[] spamFiles = spamTestFolder.listFiles((dir, name) -> !name.equals("cmds"));
             if (spamFiles != null) {
                 for (File file : spamFiles) {
                     if (file.isFile()) {
