@@ -2,9 +2,8 @@
 
 This project is about a java based spam detection program that utilizes a probability-based algorithm to classify email as potential spam. It allows users to upload a set of emails (spam and ham), train a classification model and then evaluate the overall performance of the program with its accuracy, precision etc. The application includes a GUI built with Java Swing for selecting datasets, displaying classification results, and viewing evaluation metrics.
 
-**
-Improvements: **
 
+**Improvements**
 1. Improved Tokenization
 Issue:
   	The original tokenization process included punctuation and non-word characters, which increased noise.
