@@ -1,4 +1,4 @@
-package csci2020u.assignment01;
+package project.spam_detector;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
